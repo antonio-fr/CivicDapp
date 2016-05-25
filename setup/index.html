@@ -1,0 +1,109 @@
+<!--
+Civic Dapp
+Copyright (C) 2016 Antoine FERRON & Alexandre DAVID 
+Vote with ColoredCoin and Bitcoin protocol
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, version 3 of the License.
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+You should have received a copy of the GNU General Public License
+along with this program.  If not, see <http://www.gnu.org/licenses/>
+ -->
+<!DOCTYPE html>
+<!--[if lt IE 7 ]><html class="ie ie6" lang="en"> <![endif]-->
+<!--[if IE 7 ]><html class="ie ie7" lang="en"> <![endif]-->
+<!--[if IE 8 ]><html class="ie ie8" lang="en"> <![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!--> <html lang="en"> <!--<![endif]-->
+<head>
+
+  <meta charset="utf-8">
+  <title>Preparation du vote — Civic</title>
+  <meta name="author" content="Antoine Ferron et Alexandre David">
+
+  <!--[if lt IE 9]>
+    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+  
+  <!-- IE 9 Standards mode beginning -->
+    <meta http-equiv="X-UA-Compatible" content="IE=9">
+  <!-- IE 9 Standards mode ending -->
+
+  <!-- CSS -->
+
+  <link rel="stylesheet" type="text/css" href="../template/style.css">
+
+  <!-- SCRIPT -->
+
+  <script src="colu-client.min.js"></script>
+  <script src="main.js"></script>
+
+</head>
+<body>
+
+  <div id="overlay">
+    <span id="loading"></span>
+  </div>
+
+  <header>
+    <img src="../template/logo-civic.svg" atl="" height="28" width="116">
+  </header>
+  <section><h1>INITIALISATION</h1></section>
+  <section>
+    <div class="container">
+      <h1>Préparation du vote</h1>
+      <div class="setup">
+        <form>
+          <input type="text" id="textname" placeholder="Nom de l'élection. " autocomplete="off">
+          <input type="text" id="textorga" placeholder="Nom de l'Organisateur " autocomplete="off">
+        </form>
+        <div id="downloadlink" style="display: none">
+          <p>1. <a download="vote-setup.json" id="linkch">Télécharger</a> et déplacer le fichier <code>vote-setup.json</code> dans le répertoire <b>Panel</b>.</p>
+          <p>2. Ouvrir <b>Panel/votes.html</b> pour afficher les choix (QR code + Résultat).</p>
+        </div>
+		<div id="downloadvotants" style="display: none">
+		 <p><a download="votants.json" id="linkvotants">Télécharger</a> le fichier <code>votants.json</code> pour sauvegarder la liste des votants.</p>
+		</div>
+      </div>
+      <div class="howto" id="howtodet">
+        <h3>Comment créer une élection avec Civic&nbsp;?</h3>
+        <p>1. Donner un nom à l'élection et à l'organisateur</p>
+		<p>2. Remplir les choix et les votants</p>
+		<p>3. Cliquer sur le bouton &#171; <b>Générer</b> &#187;.</p>
+        <p>4. Attendre l'initialisation du vote.</p>
+        <p>5. Télécharger le fichier <code>vote-setup.json</code> sur votre ordinateur.</p>
+      </div>
+    </div>
+  </section>
+  <section>
+  <div id="drop_zone">Déposer les fichiers de config JSON ici pour importation</div>
+  </section>
+  <section>
+    <h3>Choix</h3>
+    <div class="container" id="listechoix">
+    <p><input type="text" value="Choix" /></p>
+    <p><input type="text" value="Choix" /><input name="Addc" id="addc" type="button" value="+" /></p>
+    </div>
+  </section>
+  <section>
+    <h3>Votants</h3>
+    <div class="container" id="listevotants">
+    <p><input type="text" value="Nom Votant" /><input type="text" value="Adresse Votant" /><input id="rmv1" type="button" value="X" /></p>
+    <p><input type="text" value="Nom Votant" /><input type="text" value="Adresse Votant" /><input id="rmv2" type="button" value="X" />
+	<input name="Addv" id="addv" type="button" value="+" /></p>
+    </div>
+  </section>
+  <section>
+  <div class="setup2">
+    <button id="gogen" type="button">Générer</button>
+  </div>
+  </section>
+  <footer>
+    <p>Copyright &#169; 2016 Antoine FERRON & Alexandre DAVID - GPLv3 - Civic Dapp v0.0.1 Bitcoin protocol based. <a href="https://github.com/antonio-fr/CivicDapp" target="_blank">Get it on Github</a></p>
+    <img src="../template/bitcoin.svg" atl="" height="28" width="28">
+  </footer>
+
+</body>
+</html>

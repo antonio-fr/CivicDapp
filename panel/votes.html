@@ -1,0 +1,67 @@
+<!--
+Civic Dapp
+Copyright (C) 2016 Antoine FERRON & Alexandre DAVID 
+Vote with ColoredCoin and Bitcoin protocol
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, version 3 of the License.
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+You should have received a copy of the GNU General Public License
+along with this program.  If not, see <http://www.gnu.org/licenses/>
+ -->
+<!DOCTYPE html>
+<!--[if lt IE 7 ]><html class="ie ie6" lang="en"> <![endif]-->
+<!--[if IE 7 ]><html class="ie ie7" lang="en"> <![endif]-->
+<!--[if IE 8 ]><html class="ie ie8" lang="en"> <![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!--> <html lang="en"> <!--<![endif]-->
+<head>
+
+  <meta charset="utf-8">
+  <title>Panneau des votes — Civic</title>
+  <meta name="author" content="Antoine Ferron et Alexandre David">
+
+  <!--[if lt IE 9]>
+    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+  
+  <!-- IE 9 Standards mode beginning -->
+    <meta http-equiv="X-UA-Compatible" content="IE=9">
+  <!-- IE 9 Standards mode ending -->
+
+  <!-- CSS -->
+
+  <link rel="stylesheet" type="text/css" href="../template/style.min.css">
+
+  <!-- SCRIPT -->
+
+  <script src="colu-client.min.js"></script>
+  <script src="qrcode.min.js"></script>
+  <script src="adr.js"></script>
+  <script src="vote-setup.json"></script>
+
+</head>
+<body>
+
+  <header>
+    <img src="../template/logo-civic.svg" atl="" height="28" width="116">
+  </header>
+
+  <section>
+    <div id="candidatsListe" class="container">
+	  <h1 id="votename"></h1>
+    </div>
+	 <div id="Organizer" class="container">
+	  <h3 id="organizer"></h3>
+    </div>
+  </section>
+
+  <footer>
+    <p>Copyright &#169; 2016 Antoine FERRON & Alexandre DAVID - GPLv3 - Civic Dapp v0.0.1 Bitcoin protocol based. <a href="https://github.com/antonio-fr/CivicDapp" target="_blank">Get it on Github</a></p>
+    <img src="../template/bitcoin.svg" atl="" height="28" width="28">
+  </footer>
+
+ </body>
+</html>
