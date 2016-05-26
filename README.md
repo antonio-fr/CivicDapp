@@ -41,7 +41,7 @@ Si vous avez déjà effectué un vote, vous pouvez importer les fichiers de conf
 
 `votants.json` qui contient la liste des votants et leur adresse.
  
-Pour une édition manuelle ou à travers un script de génération, la syntaxe de vote-setup.html est :
+Pour une édition manuelle ou à travers un script de génération, la syntaxe de vote-setup.json est :
 ```
 var adrchoix = {"choix":[
  {"Nom":"Choix1","Adresse":"mXXXXXX"},
@@ -55,7 +55,7 @@ var adrchoix = {"choix":[
 ]}
 ```
 
-Pour une édition manuelle ou à travers un script de génération, la syntaxe de votants.js est:
+Pour une édition manuelle ou à travers un script de génération, la syntaxe de votants.json est:
 ```
 var votants = [
  {"nom":"Votant1","adresse":"mXXXXXX"},
@@ -66,7 +66,7 @@ var votants = [
 ```
 
 Cliquer sur "Générer"
-Civic Dapp va alors effectuer les taches suivantes:
+Civic Dapp va alors effectuer les tâches suivantes:
 * Création d'un token de vote indivisible (autant que de votants)
 * Envoie des tokens de vote à chaque votant
 * Création de fichiers de config pour import ultérieur des datas.
