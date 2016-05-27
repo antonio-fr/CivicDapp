@@ -15,6 +15,10 @@
 var apikey = null;
 //var apikey = "YOUR-API-KEY";
 
+// Enter Mobile Phone RegEx of your country
+var PhoneRegEx = /^[+]33[67][0-9]{8}$/;
+
+
 if (apikey != null)
 	var settings = {
 		"network": "mainnet",
@@ -210,7 +214,23 @@ function Generate(){
 		var nodearray = Array.from(document.getElementById("listevotants").childNodes);
 		nodearray.forEach(function(entry) {
 			if (typeof entry.childNodes[0] !== "undefined"){
-				votants.push({"nom": entry.childNodes[0].value, "adresse":entry.childNodes[1].value});
+				var adressevotant = entry.childNodes[1].value;
+				if (settings.network==="mainnet"){
+					if (PhoneRegEx.test(adressevotant)){
+						votants.push({"nom": entry.childNodes[0].value, "phone":adressevotant});
+					}
+					var adrbtc = /^[13][a-km-zA-HJ-NP-Z1-9]{25,34}$/;
+					if (adrbtc.test(adressevotant)){
+						votants.push({"nom": entry.childNodes[0].value, "adresse":adressevotant});
+					}
+				}
+				if (settings.network==="testnet"){
+					var adrbtcn = /^[2mn][1-9A-HJ-NP-Za-km-z]{25,34}$/;
+					if (adrbtcn.test(adressevotant)){
+						votants.push({"nom": entry.childNodes[0].value, "adresse":adressevotant});
+					}
+				}
+				
 			}
 		});
 		console.log(JSON.stringify(votants));
