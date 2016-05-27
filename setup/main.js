@@ -120,7 +120,7 @@ function removevot(dom){
 	if (nvot > 2) {
 		if (dom.lastChild.value==="+"){
 			var addbtnrmv = dom.removeChild(dom.lastChild);
-			dom.parentNode.childNodes[nvot-1].appendChild(addbtnrmv);
+			dom.parentNode.childNodes[nvot-2].appendChild(addbtnrmv);
 		}
 		dom.remove();
 	}
