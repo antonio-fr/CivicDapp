@@ -25,6 +25,8 @@ La clé API Colu est à saisir dans les premières lignes du fichier setup/main.
 
 `var apikey = "YOUR-API-KEY";`
 
+On peut éventuellement indiquer un RegEx pour les numéros de téléphones. Cela correspond à des numéros de portables français dans le code.
+
 ## Préparer le vote
 
 Charger dans un navigateur web, à partir des fichiers locaux ou d'un serveur web le fichier setup/index.html. Vous n'avez pas réellement besoin d'un serveur web Civic Dapp peut fonctionner directement dans un navigateur.
@@ -34,6 +36,8 @@ Entrez les informations suivantes :
 * Nom de l'organisateur
 * Les différents choix possibles
 * Les votants (nom et adresses ou numéro de téléphone)
+
+Attention : Les numéros de téléphones sont à saisir en format international (i.e. +336...).
 
 Si vous avez déjà effectué un vote, vous pouvez importer les fichiers de configuration en glisser-déposer dans la zone dédiée.
 
@@ -86,7 +90,6 @@ La page affche alors un QRCode par choix possible. Chaque votant peut envoyer so
 A la fin de la session de vote, l'organisateur peut proclamer "choix vainqueur" l'adresse qui a reçue le plus de tokens de vote.
 
 ## A faire
-* Gestion des numéros de téléphone pour livenet
 * Internationalisation, english language
 * Amélioration du CSS web pour des pages plus "responsive" (selon la résolution)
 
