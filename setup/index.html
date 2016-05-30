@@ -20,7 +20,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>
 <head>
 
   <meta charset="utf-8">
-  <title>Preparation du vote — Civic</title>
+  <title>Initialisation du vote — Civic</title>
   <meta name="author" content="Antoine Ferron et Alexandre David">
 
   <!--[if lt IE 9]>
@@ -50,58 +50,84 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>
   <header>
     <img src="../template/logo-civic.svg" atl="" height="28" width="116">
   </header>
-  <section><h1>INITIALISATION</h1></section>
+
   <section>
     <div class="container">
-      <h1>Préparation du vote</h1>
-      <div class="setup">
-        <form>
-          <input type="text" id="textname" placeholder="Nom de l'élection. " autocomplete="off">
-          <input type="text" id="textorga" placeholder="Nom de l'Organisateur " autocomplete="off">
-        </form>
-        <div id="downloadlink" style="display: none">
-          <p>1. <a download="vote-setup.json" id="linkch">Télécharger</a> et déplacer le fichier <code>vote-setup.json</code> dans le répertoire <b>Panel</b>.</p>
-          <p>2. Ouvrir <b>Panel/votes.html</b> pour afficher les choix (QR code + Résultat).</p>
-        </div>
-		<div id="downloadvotants" style="display: none">
-		 <p><a download="votants.json" id="linkvotants">Télécharger</a> le fichier <code>votants.json</code> pour sauvegarder la liste des votants.</p>
-		</div>
-      </div>
+      <h1>Initialisation du vote</h1>
       <div class="howto" id="howtodet">
         <h3>Comment créer une élection avec Civic&nbsp;?</h3>
-        <p>1. Donner un nom à l'élection et à l'organisateur</p>
-		<p>2. Remplir les choix et les votants</p>
-		<p>3. Cliquer sur le bouton &#171; <b>Générer</b> &#187;.</p>
-        <p>4. Attendre l'initialisation du vote.</p>
-        <p>5. Télécharger le fichier <code>vote-setup.json</code> sur votre ordinateur.</p>
+        <p>1. Donner un nom à l'élection et l'organisateur.</p>
+        <p>2. Définir les différentes options de choix.</p>
+        <p>3. Définir le nombre de votants.</p>
+        <p>4. Cliquer sur le bouton &#171; <b>Générer</b> &#187;.</p>
+        <p>5. Attendre l'initialisation du vote.</p>
+        <p>6. Télécharger le fichier <code>vote-setup.json</code> sur votre ordinateur.</p>
       </div>
     </div>
   </section>
-  <section>
-  <div id="drop_zone">Déposer les fichiers de config JSON ici pour importation</div>
-  </section>
-  <section>
-    <h3>Choix</h3>
-    <div class="container" id="listechoix">
-    <p><input type="text" value="Choix" /></p>
-    <p><input type="text" value="Choix" /><input name="Addc" id="addc" type="button" value="+" /></p>
+
+  <section class="elaboration">
+    <div class="setup">
+      <h3><span class="chapiter">1</span>Élaboration des normes</h3>
+      <form>
+        <div class="fieldset">
+          <input type="text" id="textname" placeholder="Nom de l'élection " autocomplete="off">
+        </div>
+        <div class="fieldset">
+          <input type="text" id="textorga" placeholder="Nom de l'organisateur " autocomplete="off">
+        </div>
+      </form>
+      <div id="downloadlink" style="display: none">
+        <p>1. <a download="vote-setup.json" id="linkch">Télécharger</a> et déplacer le fichier <code>vote-setup.json</code> dans le répertoire <b>Panel</b>.</p>
+        <p>2. Ouvrir <b>Panel/votes.html</b> pour afficher les choix (QR code + Résultat).</p>
+      </div>
+      <div id="downloadvotants" style="display: none">
+        <p><a download="votants.json" id="linkvotants">Télécharger</a> le fichier <code>votants.json</code> pour sauvegarder la liste des votants.</p>
+      </div>
     </div>
   </section>
+
   <section>
-    <h3>Votants</h3>
-    <div class="container" id="listevotants">
-    <p><input type="text" value="Nom Votant" /><input type="text" value="Adresse Votant" /><input id="rmv1" type="button" value="X" /></p>
-    <p><input type="text" value="Nom Votant" /><input type="text" value="Adresse Votant" /><input id="rmv2" type="button" value="X" />
-	<input name="Addv" id="addv" type="button" value="+" /></p>
+    <div class="container">
+      <h3><span class="chapiter">2</span>Inscription des options</h3>
+      <div id="drop_zone">Glisser / Déposer pour importer les fichiers de configuration JSON ici.</div>
+      <form id="listechoix">
+        <div class="fieldset">
+          <input type="text" placeholder="Choix">
+        </div>
+        <div class="fieldset">
+          <input type="text" placeholder="Choix"><input name="Addc" id="addc" type="button" value="">
+        </div>
+      </form>
     </div>
   </section>
-  <section>
-  <div class="setup2">
-    <button id="gogen" type="button">Générer</button>
-  </div>
+
+  <section class="elaboration">
+    <div class="container">
+      <h3><span class="chapiter">3</span>Inscription des votants</h3>
+      <form id="listevotants">
+        <div class="fieldset">
+          <input type="text" placeholder="Nom Votant"><input type="text" placeholder="Adresse Votant"><input id="rmv1" type="button" value="">
+        </div>
+        <div class="fieldset">
+          <input type="text" placeholder="Nom Votant"><input type="text" placeholder="Adresse Votant"><input id="rmv2" type="button" value="">
+          <input name="Addv" id="addv" type="button" value="">
+        </div>
+      </form>
+    </div>
   </section>
+
+  <section>
+    <div class="container">
+      <div class="setup2">
+        <button id="gogen" type="button">Générer l'élection</button>
+      </div>
+    </div>
+  </section>
+
   <footer>
-    <p>Copyright &#169; 2016 Antoine FERRON & Alexandre DAVID - GPLv3 - Civic Dapp v0.0.1 Bitcoin protocol based. <a href="https://github.com/antonio-fr/CivicDapp" target="_blank">Get it on Github</a></p>
+    <p>Copyright &#169; 2016 &#183; <a href="https://twitter.com/a_ferron" target="_blank">Antoine FERRON</a> &amp; <a href="https://twitter.com/daboloskov" target="_blank">Alexandre DAVID</a> &#183; GPLv3</p>
+    <p>Civic Dapp version 0.0.1 <a href="https://github.com/antonio-fr/CivicDapp" target="_blank">Fork me on Github</a></p>
     <img src="../template/bitcoin.svg" atl="" height="28" width="28">
   </footer>
 
