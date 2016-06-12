@@ -88,10 +88,11 @@ function AddChoix(dom){
 	var pid = dom;
 	var addbtn = document.getElementById("addc");
 	var addbtnrmv = pid.removeChild(addbtn);
-	var par = document.createElement("P");
+	var par = document.createElement("div");
+	par.className = "fieldset";
 	var inputc = document.createElement("input");
 	inputc.type = "text";
-	inputc.value = "Choix";
+	inputc.placeholder = "Choix";
 	par.appendChild(inputc);
 	par.appendChild(addbtnrmv);
 	document.getElementById("listechoix").appendChild(par); 
@@ -109,7 +110,7 @@ function AddVotant(dom){
 	inputva.value = "Adresse Votant";
 	var delbtn = document.createElement("input");
 	delbtn.type = "button";
-	delbtn.value = "X";
+	delbtn.className = "rmvc";
 	par.appendChild(inputv);
 	par.appendChild(inputva);
 	par.appendChild(delbtn);
@@ -122,7 +123,7 @@ function AddVotant(dom){
 function removevot(dom){
 	var nvot = dom.parentNode.childElementCount;
 	if (nvot > 2) {
-		if (dom.lastChild.value==="+"){
+		if (dom.lastChild.id === "addv"){
 			var addbtnrmv = dom.removeChild(dom.lastChild);
 			dom.parentNode.childNodes[nvot-2].appendChild(addbtnrmv);
 		}
@@ -144,8 +145,7 @@ function GoProcess(choix, votants) {
 		adrchoix.choix.push({"Nom":entry,"Adresse":colu.hdwallet.getAddress()});
 	});
 	nbrvotants = votants.length;
-	console.log(address);
-	console.log(document.getElementById('textname').value);
+	console.log("Preparation du vote "+document.getElementById('textname').value+" en cours");
 	var asset = {
 		"amount": nbrvotants,
 		"divisibility": 0,
@@ -175,7 +175,6 @@ function GoProcess(choix, votants) {
 			"from": [body.issueAddress],
 			"to": [],
 		};
-		console.log(adrchoix);
 		adrchoix.Token.push({"Name":asset.metadata.assetName,"ID":body.assetId, "Organizer":asset.metadata.issuer});
 		var data = new Blob(["var adrchoix = "+JSON.stringify(adrchoix)], {type: 'text/plain'});
 		textFile = window.URL.createObjectURL(data);
@@ -206,8 +205,12 @@ function Generate(){
 		var choix = [];
 		var nodearray = Array.from(document.getElementById("listechoix").childNodes);
 		nodearray.forEach(function(entry) {
-			if (typeof entry.childNodes[0] !== "undefined"){
-				choix.push(entry.childNodes[0].value);
+			if (entry.className === "fieldset"){
+				entry.childNodes.forEach(function(echild){
+					if (echild.nodeName === "INPUT" && echild.id != "addc")
+						choix.push(echild.value);
+				});
+
 			}
 		});
 		var votants = [];
@@ -234,6 +237,7 @@ function Generate(){
 			}
 		});
 		console.log(JSON.stringify(votants));
+		console.log(JSON.stringify(choix));
 		setTimeout(GoProcess, 200, choix,votants);
 	}
 };
@@ -275,7 +279,8 @@ function loadchoixfromfile(filecontent){
 	console.log("Chargement des choix");
 	filecontent.choix.forEach(function(entry) {
 		var pid = document.getElementById("listechoix");
-		var par = document.createElement("P");
+		var par = document.createElement("div");
+		par.className = "fieldset";
 		var inputc = document.createElement("input");
 		inputc.type = "text";
 		inputc.value = entry.Nom;
@@ -284,7 +289,6 @@ function loadchoixfromfile(filecontent){
 	});
 	var addchbtn = document.createElement("input");
 	addchbtn.type = "button";
-	addchbtn.value = "+";
 	addchbtn.name="Addc";
 	addchbtn.id="addc";
 	document.getElementById("listechoix").lastChild.appendChild(addchbtn);
@@ -312,7 +316,7 @@ function loadvotantsfromfile(filecontent){
 			inputva.value = entry.phone;
 		var delbtn = document.createElement("input");
 		delbtn.type = "button";
-		delbtn.value = "X";
+		delbtn.className = "rmvc";
 		par.appendChild(inputv);
 		par.appendChild(inputva);
 		par.appendChild(delbtn);
@@ -323,7 +327,6 @@ function loadvotantsfromfile(filecontent){
 	});
 	var addvotbtn = document.createElement("input");
 	addvotbtn.type = "button";
-	addvotbtn.value = "+";
 	addvotbtn.name="Addv";
 	addvotbtn.id="addv";
 	document.getElementById("listevotants").lastChild.appendChild(addvotbtn);
