@@ -284,7 +284,6 @@ function loadchoixfromfile(filecontent){
 	});
 	var addchbtn = document.createElement("input");
 	addchbtn.type = "button";
-	addchbtn.value = "+";
 	addchbtn.name="Addc";
 	addchbtn.id="addc";
 	document.getElementById("listechoix").lastChild.appendChild(addchbtn);
@@ -312,7 +311,7 @@ function loadvotantsfromfile(filecontent){
 			inputva.value = entry.phone;
 		var delbtn = document.createElement("input");
 		delbtn.type = "button";
-		delbtn.value = "X";
+		delbtn.className = "rmvc";
 		par.appendChild(inputv);
 		par.appendChild(inputva);
 		par.appendChild(delbtn);
@@ -323,7 +322,6 @@ function loadvotantsfromfile(filecontent){
 	});
 	var addvotbtn = document.createElement("input");
 	addvotbtn.type = "button";
-	addvotbtn.value = "+";
 	addvotbtn.name="Addv";
 	addvotbtn.id="addv";
 	document.getElementById("listevotants").lastChild.appendChild(addvotbtn);
