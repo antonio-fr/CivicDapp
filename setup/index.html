@@ -57,18 +57,20 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>
       <div class="howto" id="howtodet">
         <h3>Comment créer une élection avec Civic&nbsp;?</h3>
         <p>1. Donner un nom à l'élection et l'organisateur.</p>
-        <p>2. Définir les différentes options de choix.</p>
-        <p>3. Définir le nombre de votants.</p>
+        <p>2. Définir les différents choix (candidats, propositions,...)</p>
+        <p>3. Lister les votants.</p>
         <p>4. Cliquer sur le bouton &#171; <b>Générer</b> &#187;.</p>
         <p>5. Attendre l'initialisation du vote.</p>
         <p>6. Télécharger le fichier <code>vote-setup.json</code> sur votre ordinateur.</p>
       </div>
     </div>
   </section>
-
+  <div class="container">
+       <div id="drop_zone">Glisser / Déposer pour importer les fichiers de configuration JSON ici.</div>
+  </div>
   <section class="elaboration">
     <div class="setup">
-      <h3><span class="chapiter">1</span>Élaboration des normes</h3>
+      <h3><span class="chapiter">1</span>Informations sur l'élection</h3>
       <form>
         <div class="fieldset">
           <input type="text" id="textname" placeholder="Nom de l'élection " autocomplete="off">
@@ -89,8 +91,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>
 
   <section>
     <div class="container">
-      <h3><span class="chapiter">2</span>Inscription des options</h3>
-      <div id="drop_zone">Glisser / Déposer pour importer les fichiers de configuration JSON ici.</div>
+      <h3><span class="chapiter">2</span>Options de vote</h3>
       <form id="listechoix">
         <div class="fieldset">
           <input type="text" placeholder="Choix">
@@ -107,10 +108,10 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>
       <h3><span class="chapiter">3</span>Inscription des votants</h3>
       <form id="listevotants">
         <div class="fieldset">
-          <input type="text" placeholder="Nom Votant"><input type="text" placeholder="Adresse Votant"><input id="rmv1" type="button" value="">
+          <input type="text" placeholder="Nom Votant"><input type="text" placeholder="Adresse Votant"><input class="rmvc" id="rmv1" type="button" value="">
         </div>
         <div class="fieldset">
-          <input type="text" placeholder="Nom Votant"><input type="text" placeholder="Adresse Votant"><input id="rmv2" type="button" value="">
+          <input type="text" placeholder="Nom Votant"><input type="text" placeholder="Adresse Votant"><input class="rmvc" id="rmv2" type="button" value="">
           <input name="Addv" id="addv" type="button" value="">
         </div>
       </form>

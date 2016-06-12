@@ -109,7 +109,7 @@ function AddVotant(dom){
 	inputva.value = "Adresse Votant";
 	var delbtn = document.createElement("input");
 	delbtn.type = "button";
-	delbtn.value = "X";
+	delbtn.className = "rmvc";
 	par.appendChild(inputv);
 	par.appendChild(inputva);
 	par.appendChild(delbtn);
@@ -122,7 +122,7 @@ function AddVotant(dom){
 function removevot(dom){
 	var nvot = dom.parentNode.childElementCount;
 	if (nvot > 2) {
-		if (dom.lastChild.value==="+"){
+		if (dom.lastChild.id === "addv"){
 			var addbtnrmv = dom.removeChild(dom.lastChild);
 			dom.parentNode.childNodes[nvot-2].appendChild(addbtnrmv);
 		}

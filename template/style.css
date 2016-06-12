@@ -360,8 +360,7 @@ section form input[type="button"]#addv {
   background: url("plus.svg") no-repeat 8px 8px;
   background-color: #E7FFEA;
   border: 1px solid #28CA40; }
-section form input[type="button"]#rmv1,
-section form input[type="button"]#rmv2 {
+.rmvc {
   background: url("cross.svg") no-repeat 9px 9px;
   background-color: #FFE4E3;
   border: 1px solid #FF5F56; }
@@ -408,7 +407,8 @@ section code {
 .elaboration,
 .voters {
   background-color: rgb(250, 250, 250); }
-#dropZone {
+#drop_zone {
+  padding: 0px;
   border: 2px dashed #bbb;
   -webkit-border-radius: 4px;
   -moz-border-radius: 4px;
