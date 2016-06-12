@@ -55,12 +55,6 @@ window.onload = function () {
 		dropZone.style.fontSize="20px";
 	}, false);
 	dropZone.addEventListener('drop', handleFileSelect, false);
-	node = document.getElementById("listevotants").childNodes; 
-	for(child in node){
-		if (node[child].nodeName === "#text"){
-			node[child].remove();
-		}
-	};
 }
 
 function sendtokens(args){
@@ -78,10 +72,19 @@ function sendtokens(args){
 			evalRespond.type = 'message';
 			evalRespond.response = body;
 			var txid = evalRespond.response.txid;
+			document.getElementById("gogen").style.display = "none";
 			console.log(txid);
+			var domsuc = document.getElementById("Success");
+			if (settings.network == "testnet")
+				var urltx = "http://coloredcoins.org/explorer/testnet/tx/"+txid;
+			if (settings.network == "mainnet")
+				var urltx = "http://coloredcoins.org/explorer/tx/"+txid;
+			document.getElementById('linktxid').href = urltx;
+			domsuc.style.display = "block";
 			document.getElementById("loading").remove();
 			var overlay = document.getElementById("overlay");
 			overlay.classList.remove("toggle");
+			document.getElementById("textname").scrollIntoView();
 		});
 }
 function AddChoix(dom){
@@ -101,13 +104,14 @@ function AddVotant(dom){
 	var pid = dom;
 	var addbtn = document.getElementById("addv");
 	var addbtnrmv = pid.removeChild(addbtn);
-	var par = document.createElement("P");
+	var par = document.createElement("div");
+	par.className = "fieldset";
 	var inputv = document.createElement("input");
 	inputv.type = "text";
-	inputv.value = "Nom Votant";
+	inputv.placeholder = "Nom Votant";
 	var inputva = document.createElement("input");
 	inputva.type = "text";
-	inputva.value = "Adresse Votant";
+	inputva.placeholder = "Adresse Votant";
 	var delbtn = document.createElement("input");
 	delbtn.type = "button";
 	delbtn.className = "rmvc";
@@ -203,7 +207,7 @@ function GoProcess(choix, votants) {
 function Generate(){
 	if (document.getElementById('textname').value.length > 0 ){
 		var choix = [];
-		var nodearray = Array.from(document.getElementById("listechoix").childNodes);
+		var nodearray = Array.from(document.getElementById("listechoix").children);
 		nodearray.forEach(function(entry) {
 			if (entry.className === "fieldset"){
 				entry.childNodes.forEach(function(echild){
@@ -214,26 +218,25 @@ function Generate(){
 			}
 		});
 		var votants = [];
-		var nodearray = Array.from(document.getElementById("listevotants").childNodes);
+		var nodearray = Array.from(document.getElementById("listevotants").children);
 		nodearray.forEach(function(entry) {
-			if (typeof entry.childNodes[0] !== "undefined"){
-				var adressevotant = entry.childNodes[1].value;
+			if (entry.children[0].nodeName === "INPUT"){
+				var adressevotant = entry.children[1].value;
 				if (settings.network==="mainnet"){
 					if (PhoneRegEx.test(adressevotant)){
-						votants.push({"nom": entry.childNodes[0].value, "phone":adressevotant});
+						votants.push({"nom": entry.children[0].value, "phone":adressevotant});
 					}
 					var adrbtc = /^[13][a-km-zA-HJ-NP-Z1-9]{25,34}$/;
 					if (adrbtc.test(adressevotant)){
-						votants.push({"nom": entry.childNodes[0].value, "adresse":adressevotant});
+						votants.push({"nom": entry.children[0].value, "adresse":adressevotant});
 					}
 				}
 				if (settings.network==="testnet"){
 					var adrbtcn = /^[2mn][1-9A-HJ-NP-Za-km-z]{25,34}$/;
 					if (adrbtcn.test(adressevotant)){
-						votants.push({"nom": entry.childNodes[0].value, "adresse":adressevotant});
+						votants.push({"nom": entry.children[0].value, "adresse":adressevotant});
 					}
 				}
-				
 			}
 		});
 		console.log(JSON.stringify(votants));
@@ -304,7 +307,8 @@ function loadvotantsfromfile(filecontent){
 	console.log("Chargement des votants");
 	filecontent.forEach(function(entry) {
 		var pid = document.getElementById("listechoix");
-		var par = document.createElement("P");
+		var par = document.createElement("div");
+		par.className = "fieldset";
 		var inputv = document.createElement("input");
 		inputv.type = "text";
 		inputv.value = entry.nom;

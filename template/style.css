@@ -439,6 +439,11 @@ section .chosen img {
   margin: 0 auto;}
 section .chosen p {
   padding: 20px 0 0; }
+#Success {
+	font-size: 24px;
+	font-weight: bold;
+	color: darkgreen
+}
 /* OVERLAY */
 #overlay {
   display: none;
