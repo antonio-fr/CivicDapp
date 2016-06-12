@@ -306,7 +306,10 @@ function loadvotantsfromfile(filecontent){
 		inputv.value = entry.nom;
 		var inputva = document.createElement("input");
 		inputva.type = "text";
-		inputva.value = entry.adresse;
+		if (entry.adresse != undefined)
+			inputva.value = entry.adresse;
+		else
+			inputva.value = entry.phone;
 		var delbtn = document.createElement("input");
 		delbtn.type = "button";
 		delbtn.value = "X";
