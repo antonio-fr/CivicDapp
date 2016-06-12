@@ -317,27 +317,68 @@ header img {
   z-index: 20; }
 /* SETUP */
 section {
-  margin-bottom: 25px;
+  padding: 40px;
   text-align: center; }
 section h1 {
-  padding: 40px; }
+  padding: 20px 0 40px; }
+section h3 {
+  padding: 20px 0 40px; }
 section .setup {
   margin-bottom: 62px; }
-section .setup form { margin: 4px 0 12px; }
-section .setup form input { height: 32px;
+.chapiter {
+  border: 3px solid #1585FF;
+  color: #1585FF;
+  background-color: #EEF6FF;
+  margin-right: 16px;
+  padding: 5px 15px;
+  -webkit-border-radius: 120px;
+  -moz-border-radius: 120px;
+  border-radius: 120px; }
+section form { margin: 4px 0 12px; }
+section form .fieldset {
+  /*position: relative;*/
+  margin-bottom: 12px; }
+section form input {
+  height: 32px;
   padding-left: 8px;
   border: 1px solid #E3E3E3;
   -webkit-border-radius: 4px;
   -moz-border-radius: 4px;
   border-radius: 4px; }
+.elaboration input:nth-child(2) { margin-left: 8px; }
+section form input[type="button"] {
+  vertical-align: middle;
+  margin-top: -4px;
+  margin-left: 8px;
+  width: 34px;
+  height: 34px;
+  -webkit-border-radius: 120px;
+  -moz-border-radius: 120px;
+  border-radius: 120px; }
+section form input[type="button"]#addc,
+section form input[type="button"]#addv {
+  background: url("plus.svg") no-repeat 8px 8px;
+  background-color: #E7FFEA;
+  border: 1px solid #28CA40; }
+.rmvc {
+  background: url("cross.svg") no-repeat 9px 9px;
+  background-color: #FFE4E3;
+  border: 1px solid #FF5F56; }
 button {
-  padding: 6px 18px;
-  background-color: #1585FF;
-  color: #FFF;
-  border: 0;
+  padding: 16px 32px;
+  margin: 60px;
+  background-color: transparent;
+  color: #1585FF;
+  font-size: 2.8rem;
+  border: 2px solid #1585FF;
   -webkit-border-radius: 4px;
   -moz-border-radius: 4px;
-  border-radius: 4px; }
+  border-radius: 4px;
+  transition: all 0.2s cubic-bezier(0.5, 0.31, 0.53, 1.45); }
+button:hover {
+  background-color: #1585FF;
+  color: #FFF; }
+section form input[type="button"]:active,
 button:active {
   -webkit-transform: translateY(1px);
   -moz-transform: translateY(1px);
@@ -346,7 +387,8 @@ button:active {
   transform: translateY(1px); }
 section .howto {
   padding-bottom: 32px; }
-section .howto p,
+section .howto p {
+  padding: 2px 0; }
 section .howto h3,
 section .setup p {
   padding: 8px 0; }
@@ -362,7 +404,20 @@ section code {
   -webkit-border-radius: 2px;
   -moz-border-radius: 2px;
   border-radius: 2px; }
-/*PANEL*/
+.elaboration,
+.voters {
+  background-color: rgb(250, 250, 250); }
+#drop_zone {
+  padding: 0px;
+  border: 2px dashed #bbb;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  border-radius: 4px;
+  padding: 32px;
+  margin: 16px 0 46px;
+  text-align: center;
+  color: #bbb; }
+/* PANEL */
 section .chosen {
   padding: 26px;
   width: 280px;
@@ -384,7 +439,7 @@ section .chosen img {
   margin: 0 auto;}
 section .chosen p {
   padding: 20px 0 0; }
-/*OVERLAY*/
+/* OVERLAY */
 #overlay {
   display: none;
   background-color: rgba(14,14,14,.96);
@@ -433,35 +488,17 @@ section .chosen p {
 /* FOOTER */
 footer {
   margin: 0 auto;
-  height: 140px;
+  padding-top: 40px;
+  height: 200px;
   border-top: 1px solid #f4f6f8;
   text-align: center; }
 footer p {
-  color: #bfbfbf;
-  font-size: 1.4rem;
-  padding: 20px; }
-footer #return {
-  display: none;
-  position: absolute;
-  bottom: 60px;
-  left: 50%;
-  margin-left: -20px;
-  background: url("../img/top.svg") center no-repeat;
-  width: 40px;
-  height: 40px;
-  cursor: pointer;
-  -webkit-animation: fadeInUp 300ms ease;
-  -moz-animation: fadeInUp 300ms ease;
-  -ms-animation: fadeInUp 300ms ease;
-  -o-animation: fadeInUp 300ms ease;
-  animation: fadeInUp 300ms ease; }
-#drop_zone {
-    border: 2px dashed #bbb;
-    -moz-border-radius: 5px;
-    -webkit-border-radius: 5px;
-    border-radius: 5px;
-    padding: 25px;
-    text-align: center;
-    font: 20pt bold 'Vollkorn';
-    color: #bbb;
+  color: #7B7B7B;
+  font-size: 1.6rem; }
+footer a {
+  color: #1585FF;
+  text-decoration: none; }
+footer a:hover {
+  text-decoration: underline;
 }
+footer img { margin-top: 12px; }
