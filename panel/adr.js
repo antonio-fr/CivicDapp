@@ -41,7 +41,7 @@ function testrcv(choix){
 		console.log("Error");
 		setTimeout(testrcv, 15000, choix);
 	};
-	xrhttp.open("GET", "https://explorer.coloredcoins.org/api/GetAddressInfo?address="+choix.Addresse, true);
+	xrhttp.open("GET", "https://explorer.coloredcoins.org/api/GetAddressInfo?address="+choix.Adresse, true);
 	xrhttp.setRequestHeader("Cache-Control", "no-cache,no-store");
 	xrhttp.setRequestHeader("Pragma", "no-cache");
 	xrhttp.setRequestHeader("Expires", -1);
@@ -62,7 +62,7 @@ window.onload = function () {
 		divchoix.appendChild(nomchoix);
 		document.body.appendChild(divchoix);
 		var qrcode = new QRCode(divchoix.id, {width:202,height: 202, correctLevel : QRCode.CorrectLevel.M});
-		qrcode.makeCode("bitcoin:"+choix.Addresse);
+		qrcode.makeCode("bitcoin:"+choix.Adresse);
 		divchoix.appendChild(elemDiv);
 		var address = choix.Addresse;
 		setTimeout(testrcv, 500, choix);
