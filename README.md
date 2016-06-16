@@ -69,7 +69,9 @@ var votants = [
 ]
 ```
 
-Cliquer sur "Générer"
+ou bien ````"phone":"+336xxxx"```
+
+Cliquer sur "Générer l'élection"
 Civic Dapp va alors effectuer les tâches suivantes:
 * Création d'un token de vote indivisible (autant que de votants)
 * Envoie des tokens de vote à chaque votant
@@ -91,7 +93,6 @@ A la fin de la session de vote, l'organisateur peut proclamer "choix vainqueur" 
 
 ## A faire
 * Internationalisation, english language
-* Amélioration du CSS web pour des pages plus "responsive" (selon la résolution)
 
 
 License :
