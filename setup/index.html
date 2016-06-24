@@ -20,8 +20,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>
 <head>
 
   <meta charset="utf-8">
-  <title>Initialisation du vote — Civic</title>
-  <meta name="author" content="Antoine Ferron et Alexandre David">
+  <title>Vote Setup — Civic</title>
+  <meta name="author" content="Antoine Ferron and Alexandre David">
 
   <!--[if lt IE 9]>
     <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
@@ -53,55 +53,55 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>
 
   <section>
     <div class="container">
-      <h1>Initialisation du vote</h1>
+      <h1>Vote Setup</h1>
       <div class="howto" id="howtodet">
-        <h3>Comment créer une élection avec Civic&nbsp;?</h3>
-        <p>1. Donner un nom à l'élection et l'organisateur.</p>
-        <p>2. Définir les différents choix (candidats, propositions,...)</p>
-        <p>3. Lister les votants.</p>
-        <p>4. Cliquer sur le bouton &#171; <b>Générer</b> &#187;.</p>
-        <p>5. Attendre l'initialisation du vote.</p>
-        <p>6. Télécharger le fichier <code>vote-setup.json</code> sur votre ordinateur.</p>
+        <h3>How to create an election with Civic Dapp &nbsp;?</h3>
+        <p>1. Fill in election name and organizer</p>
+        <p>2. Define the choices (candidates, proposals,...).</p>
+        <p>3. List the voters.</p>
+        <p>4. Click on &#171; <b>Generate</b> &#187; button.</p>
+        <p>5. Wait for vote initialization.</p>
+        <p>6. Download <code>vote-setup.json</code> file in your computer.</p>
       </div>
     </div>
   </section>
   <div class="container">
-       <div id="drop_zone">Glisser / Déposer pour importer les fichiers de configuration JSON ici.</div>
+       <div id="drop_zone">Drag and drop JSON configuration here to import them</div>
   </div>
   <section class="elaboration">
     <div class="setup">
-      <h3><span class="chapiter">1</span>Informations sur l'élection</h3>
+      <h3><span class="chapiter">1</span>Information about the election</h3>
       <form>
         <div class="fieldset">
-          <input type="text" id="textname" placeholder="Nom de l'élection " autocomplete="off">
+          <input type="text" id="textname" placeholder="Election Name " autocomplete="off">
         </div>
         <div class="fieldset">
-          <input type="text" id="textorga" placeholder="Nom de l'organisateur " autocomplete="off">
+          <input type="text" id="textorga" placeholder="Organizer Name " autocomplete="off">
         </div>
       </form>
       <div id="Success" style="display: none">
-        <p>Election mise en place avec succès!</p>
+        <p>Election successfully setup!</p>
       </div>
       <div id="downloadlink" style="display: none">
-        <p>Vérifier <a target="_blank" id="linktxid">ici</a> la bonne exécution</p>
-        <p>1. <a download="vote-setup.json" id="linkch">Télécharger</a> et déplacer le fichier <code>vote-setup.json</code> dans le répertoire <b>Panel</b>.</p>
-        <p>2. Ouvrir <b>Panel/votes.html</b> pour afficher les choix (QR code + Résultat).</p>
+        <p>Check <a target="_blank" id="linktxid">here</a> the right processing</p>
+        <p>1. <a download="vote-setup.json" id="linkch">Download</a> and move <code>vote-setup.json</code> file in <b>Panel</b> directory.</p>
+        <p>2. Open <b>Panel/votes.html</b> to display the choices (QR code and results).</p>
       </div>
-      <div id="downloadvotants" style="display: none">
-        <p><a download="votants.json" id="linkvotants">Télécharger</a> le fichier <code>votants.json</code> pour sauvegarder la liste des votants.</p>
+      <div id="downloadvoters" style="display: none">
+        <p><a download="voters.json" id="linkvoters">Download</a> <code>voters.json</code> file to save voters list.</p>
       </div>
     </div>
   </section>
 
   <section>
     <div class="container">
-      <h3><span class="chapiter">2</span>Options de vote</h3>
-      <form id="listechoix">
+      <h3><span class="chapiter">2</span>Vote Choices</h3>
+      <form id="choicelist">
         <div class="fieldset">
-          <input type="text" placeholder="Choix">
+          <input type="text" placeholder="Choice">
         </div>
         <div class="fieldset">
-          <input type="text" placeholder="Choix"><input name="Addc" id="addc" type="button" value="">
+          <input type="text" placeholder="Choice"><input name="Addc" id="addc" type="button" value="">
         </div>
       </form>
     </div>
@@ -109,13 +109,13 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>
 
   <section class="elaboration">
     <div class="container">
-      <h3><span class="chapiter">3</span>Inscription des votants</h3>
-      <form id="listevotants">
+      <h3><span class="chapiter">3</span>Voters Registration</h3>
+      <form id="voterslist">
         <div class="fieldset">
-          <input type="text" placeholder="Nom Votant"><input type="text" placeholder="Adresse Votant"><input class="rmvc" id="rmv1" type="button" value="">
+          <input type="text" placeholder="Voter Name"><input type="text" placeholder="Voter Address or Phone"><input class="rmvc" id="rmv1" type="button" value="">
         </div>
         <div class="fieldset">
-          <input type="text" placeholder="Nom Votant"><input type="text" placeholder="Adresse Votant"><input class="rmvc" id="rmv2" type="button" value="">
+          <input type="text" placeholder="Voter Name"><input type="text" placeholder="Voter Address or Phone"><input class="rmvc" id="rmv2" type="button" value="">
           <input name="Addv" id="addv" type="button" value="">
         </div>
       </form>
@@ -125,15 +125,15 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>
   <section>
     <div class="container">
       <div class="setup2">
-        <button id="gogen" type="button">Générer l'élection</button>
+        <button id="gogen" type="button">Generate the election</button>
       </div>
     </div>
   </section>
 
   <footer>
     <p>Copyright &#169; 2016 &#183; <a href="https://twitter.com/a_ferron" target="_blank">Antoine FERRON</a> &amp; <a href="https://twitter.com/daboloskov" target="_blank">Alexandre DAVID</a> &#183; GPLv3</p>
-    <p>Civic Dapp version 0.0.4 <a href="https://github.com/antonio-fr/CivicDapp" target="_blank">Fork me on Github</a></p>
-    <img src="../template/bitcoin.svg" atl="" height="28" width="28">
+    <p>Civic Dapp version 0.0.5 <a href="https://github.com/antonio-fr/CivicDapp" target="_blank">Fork me on Github</a></p>
+    <img src="../template/bitcoin.svg" alt="" height="28" width="28">
   </footer>
 
 </body>

@@ -35,7 +35,7 @@ window.onload = function () {
 	colu = new Colu(settings);
 	colu.init();
 	document.getElementById("addc").onclick = function(){
-		AddChoix(this.parentNode);
+		AddChoice(this.parentNode);
 	};
 	document.getElementById("addv").onclick = function(){
 		AddVotant(this.parentNode);
@@ -65,7 +65,7 @@ function sendtokens(args){
 				evalRespond.type = 'error';
 				evalRespond.response = err;
 				console.log(evalRespond.response);
-				document.getElementById("loading").innerHTML = 'ERREUR<br>'+evalRespond.response.error;
+				document.getElementById("loading").innerHTML = 'ERROR<br>'+evalRespond.response.error;
 				return;
 			}
 			var evalRespond = {};
@@ -87,7 +87,7 @@ function sendtokens(args){
 			document.getElementById("textname").scrollIntoView();
 		});
 }
-function AddChoix(dom){
+function AddChoice(dom){
 	var pid = dom;
 	var addbtn = document.getElementById("addc");
 	var addbtnrmv = pid.removeChild(addbtn);
@@ -95,10 +95,10 @@ function AddChoix(dom){
 	par.className = "fieldset";
 	var inputc = document.createElement("input");
 	inputc.type = "text";
-	inputc.placeholder = "Choix";
+	inputc.placeholder = "Choice";
 	par.appendChild(inputc);
 	par.appendChild(addbtnrmv);
-	document.getElementById("listechoix").appendChild(par); 
+	document.getElementById("choicelist").appendChild(par); 
 };
 function AddVotant(dom){
 	var pid = dom;
@@ -108,10 +108,10 @@ function AddVotant(dom){
 	par.className = "fieldset";
 	var inputv = document.createElement("input");
 	inputv.type = "text";
-	inputv.placeholder = "Nom Votant";
+	inputv.placeholder = "Voter Name";
 	var inputva = document.createElement("input");
 	inputva.type = "text";
-	inputva.placeholder = "Adresse Votant";
+	inputva.placeholder = "Voter Address or Phone";
 	var delbtn = document.createElement("input");
 	delbtn.type = "button";
 	delbtn.className = "rmvc";
@@ -122,45 +122,45 @@ function AddVotant(dom){
 	delbtn.onclick = function(){
 		removevot(this.parentNode);
 	};
-	document.getElementById("listevotants").appendChild(par);
+	document.getElementById("voterslist").appendChild(par);
 };
 function removevot(dom){
 	var nvot = dom.parentNode.childElementCount;
 	if (nvot > 2) {
 		if (dom.lastChild.id === "addv"){
 			var addbtnrmv = dom.removeChild(dom.lastChild);
-			dom.parentNode.childNodes[nvot-2].appendChild(addbtnrmv);
+			dom.parentNode.children[nvot-2].appendChild(addbtnrmv);
 		}
 		dom.remove();
 	}
 	else
-		console.log("Il faut au moins 2 votants!");
+		console.log("2 voters needed at least!");
 };
-function GoProcess(choix, votants) { 
+function GoProcess(choices, voters) { 
 	var overlay = document.getElementById("overlay");
 	overlay.classList.add("toggle");
-	document.getElementById("loading").innerHTML = 'Patientez...';
+	document.getElementById("loading").innerHTML = 'Please Wait...';
 	var privateSeed = colu.hdwallet.getPrivateSeed();
 	var mainadr = colu.hdwallet.getAddress();
 	address = mainadr;
 	console.log(address);
-	adrchoix = {"choix":[],"Token":[]};
-	choix.forEach(function(entry) {
-		adrchoix.choix.push({"Nom":entry,"Adresse":colu.hdwallet.getAddress()});
+	choiceadr = {"choices":[],"Token":[]};
+	choices.forEach(function(entry) {
+		choiceadr.choices.push({"Name":entry,"Address":colu.hdwallet.getAddress()});
 	});
-	nbrvotants = votants.length;
-	console.log("Preparation du vote "+document.getElementById('textname').value+" en cours");
+	numvoters = voters.length;
+	console.log("Vote "+document.getElementById('textname').value+" setup in progress");
 	var asset = {
-		"amount": nbrvotants,
+		"amount": numvoters,
 		"divisibility": 0,
 		"reissueable": false,
 		"transfer": [{
-			"amount": nbrvotants,
+			"amount": numvoters,
 		}],
 		"metadata": {
 			"assetName": document.getElementById('textname').value,
 			"issuer": document.getElementById('textorga').value,
-			"description": "Token de vote"
+			"description": "Vote Token"
 		}
 	};
 	//create n token
@@ -170,7 +170,7 @@ function GoProcess(choix, votants) {
 			evalRespond.type = 'error';
 			evalRespond.response = err;
 			console.log("Erreur");
-			document.getElementById("loading").innerHTML = 'ERREUR';
+			document.getElementById("loading").innerHTML = 'ERROR';
 			return;
 		}
 		console.log(body);
@@ -179,17 +179,17 @@ function GoProcess(choix, votants) {
 			"from": [body.issueAddress],
 			"to": [],
 		};
-		adrchoix.Token.push({"Name":asset.metadata.assetName,"ID":body.assetId, "Organizer":asset.metadata.issuer});
-		var data = new Blob(["var adrchoix = "+JSON.stringify(adrchoix)], {type: 'text/plain'});
+		choiceadr.Token.push({"Name":asset.metadata.assetName,"ID":body.assetId, "Organizer":asset.metadata.issuer});
+		var data = new Blob(["var choiceadr = "+JSON.stringify(choiceadr)], {type: 'text/plain'});
 		textFile = window.URL.createObjectURL(data);
 		document.getElementById('linkch').href = textFile;
 		document.getElementById('downloadlink').style.display = 'block';
-		var datav = new Blob(["var votants = "+JSON.stringify(votants)], {type: 'text/plain'});
+		var datav = new Blob(["var voters = "+JSON.stringify(voters)], {type: 'text/plain'});
 		textFile = window.URL.createObjectURL(datav);
-		document.getElementById('linkvotants').href = textFile;
-		document.getElementById('downloadvotants').style.display = 'block';
+		document.getElementById('linkvoters').href = textFile;
+		document.getElementById('downloadvoters').style.display = 'block';
 		document.getElementById('howtodet').style.display = 'none';
-		votants.forEach(function(item) {
+		voters.forEach(function(item) {
 			if (item.phone != undefined)
 				args.to.push({
 					"phoneNumber": item.phone,
@@ -197,7 +197,7 @@ function GoProcess(choix, votants) {
 					"amount": 1 });
 			if (item.adresse != undefined)
 				args.to.push({
-					"address": item.adresse,
+					"address": item.address,
 					"assetId": assetId,
 					"amount": 1 });
 		});
@@ -206,42 +206,42 @@ function GoProcess(choix, votants) {
 };
 function Generate(){
 	if (document.getElementById('textname').value.length > 0 ){
-		var choix = [];
-		var nodearray = Array.from(document.getElementById("listechoix").children);
+		var choices = [];
+		var nodearray = Array.from(document.getElementById("choicelist").children);
 		nodearray.forEach(function(entry) {
 			if (entry.className === "fieldset"){
-				entry.childNodes.forEach(function(echild){
+				entry.children.forEach(function(echild){
 					if (echild.nodeName === "INPUT" && echild.id != "addc")
-						choix.push(echild.value);
+						choices.push(echild.value);
 				});
 
 			}
 		});
-		var votants = [];
-		var nodearray = Array.from(document.getElementById("listevotants").children);
+		var voters = [];
+		var nodearray = Array.from(document.getElementById("voterslist").children);
 		nodearray.forEach(function(entry) {
 			if (entry.children[0].nodeName === "INPUT"){
-				var adressevotant = entry.children[1].value;
+				var voteraddress = entry.children[1].value;
 				if (settings.network==="mainnet"){
-					if (PhoneRegEx.test(adressevotant)){
-						votants.push({"nom": entry.children[0].value, "phone":adressevotant});
+					if (PhoneRegEx.test(voteraddress)){
+						voters.push({"name": entry.children[0].value, "phone":voteraddress});
 					}
 					var adrbtc = /^[13][a-km-zA-HJ-NP-Z1-9]{25,34}$/;
-					if (adrbtc.test(adressevotant)){
-						votants.push({"nom": entry.children[0].value, "adresse":adressevotant});
+					if (adrbtc.test(voteraddress)){
+						voters.push({"name": entry.children[0].value, "address":voteraddress});
 					}
 				}
 				if (settings.network==="testnet"){
 					var adrbtcn = /^[2mn][1-9A-HJ-NP-Za-km-z]{25,34}$/;
-					if (adrbtcn.test(adressevotant)){
-						votants.push({"nom": entry.children[0].value, "adresse":adressevotant});
+					if (adrbtcn.test(voteraddress)){
+						voters.push({"name": entry.children[0].value, "address":voteraddress});
 					}
 				}
 			}
 		});
-		console.log(JSON.stringify(votants));
-		console.log(JSON.stringify(choix));
-		setTimeout(GoProcess, 200, choix,votants);
+		console.log(JSON.stringify(voters));
+		console.log(JSON.stringify(choices));
+		setTimeout(GoProcess, 200, choices,voters);
 	}
 };
 function handleFileSelect(evt) {
@@ -254,14 +254,14 @@ function handleFileSelect(evt) {
 		reader.onload = function(event) {
 			var code = event.target.result;
 			eval(code);
-			loadchoixfromfile(adrchoix);
+			loadchoicesfromfile(choiceadr);
 		};
 	};
-	if (files[0].name==="votants.json"){
+	if (files[0].name==="voters.json"){
 		reader.onload = function(event) {
 			var code = event.target.result;
 			eval(code);
-			loadvotantsfromfile(votants);
+			loadvotersfromfile(voters);
 		};
 	};
 	reader.readAsText(files[0]);
@@ -272,21 +272,21 @@ function handleDragOver(evt) {
     evt.dataTransfer.dropEffect = 'copy';
 	document.getElementById("drop_zone").style.fontSize="30px";
 }
-function loadchoixfromfile(filecontent){
+function loadchoicesfromfile(filecontent){
 	document.getElementById("textname").value = filecontent.Token[0].Name;
 	document.getElementById("textorga").value = filecontent.Token[0].Organizer;
-	var domchoix = document.getElementById("listechoix");
-	while (domchoix.hasChildNodes()) {
-		domchoix.removeChild(domchoix.lastChild);
+	var domchoices = document.getElementById("choicelist");
+	while (domchoices.hasChildNodes()) {
+		domchoices.removeChild(domchoices.lastChild);
 	}
-	console.log("Chargement des choix");
-	filecontent.choix.forEach(function(entry) {
-		var pid = document.getElementById("listechoix");
+	console.log("Loading of the choices");
+	filecontent.choices.forEach(function(entry) {
+		var pid = document.getElementById("choicelist");
 		var par = document.createElement("div");
 		par.className = "fieldset";
 		var inputc = document.createElement("input");
 		inputc.type = "text";
-		inputc.value = entry.Nom;
+		inputc.value = entry.Name;
 		par.appendChild(inputc);
 		pid.appendChild(par); 
 	});
@@ -294,28 +294,28 @@ function loadchoixfromfile(filecontent){
 	addchbtn.type = "button";
 	addchbtn.name="Addc";
 	addchbtn.id="addc";
-	document.getElementById("listechoix").lastChild.appendChild(addchbtn);
+	document.getElementById("choicelist").lastChild.appendChild(addchbtn);
 	addchbtn.onclick = function(){
-		AddChoix(this.parentNode);
+		AddChoice(this.parentNode);
 	};
 }
-function loadvotantsfromfile(filecontent){
-	var domvotants = document.getElementById("listevotants");
-	while (domvotants.hasChildNodes()) {
-		domvotants.removeChild(domvotants.lastChild);
+function loadvotersfromfile(filecontent){
+	var domvoters = document.getElementById("voterslist");
+	while (domvoters.hasChildNodes()) {
+		domvoters.removeChild(domvoters.lastChild);
 	}
-	console.log("Chargement des votants");
+	console.log("Loading of the voters");
 	filecontent.forEach(function(entry) {
-		var pid = document.getElementById("listechoix");
+		var pid = document.getElementById("choicelist");
 		var par = document.createElement("div");
 		par.className = "fieldset";
 		var inputv = document.createElement("input");
 		inputv.type = "text";
-		inputv.value = entry.nom;
+		inputv.value = entry.name;
 		var inputva = document.createElement("input");
 		inputva.type = "text";
 		if (entry.adresse != undefined)
-			inputva.value = entry.adresse;
+			inputva.value = entry.address;
 		else
 			inputva.value = entry.phone;
 		var delbtn = document.createElement("input");
@@ -324,7 +324,7 @@ function loadvotantsfromfile(filecontent){
 		par.appendChild(inputv);
 		par.appendChild(inputva);
 		par.appendChild(delbtn);
-		document.getElementById("listevotants").appendChild(par);
+		document.getElementById("voterslist").appendChild(par);
 		delbtn.onclick = function(){
 			removevot(this.parentNode);
 		};
@@ -333,7 +333,7 @@ function loadvotantsfromfile(filecontent){
 	addvotbtn.type = "button";
 	addvotbtn.name="Addv";
 	addvotbtn.id="addv";
-	document.getElementById("listevotants").lastChild.appendChild(addvotbtn);
+	document.getElementById("voterslist").lastChild.appendChild(addvotbtn);
 	addvotbtn.onclick = function(){
 		AddVotant(this.parentNode);
 	};

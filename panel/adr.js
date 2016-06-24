@@ -11,7 +11,7 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>
 
-function testrcv(choix){
+function testrcv(choices){
 	var receivedok=false;
 	var xrhttp = new XMLHttpRequest();
 	xrhttp.onreadystatechange = function() {
@@ -19,7 +19,7 @@ function testrcv(choix){
 			if (xrhttp.status == 200) {
 				result = JSON.parse(xrhttp.responseText);
 				if(result.assets.length>0){
-					if (result.assets[0].assetId === adrchoix.Token[0].ID){ 
+					if (result.assets[0].assetId === choiceadr.Token[0].ID){ 
 						fundinaddr = result.assets[0].received;
 					}else{
 						fundinaddr = 0;}
@@ -29,43 +29,43 @@ function testrcv(choix){
 				nomvote = " vote"
 				if (fundinaddr>1)
 					nomvote += "s"
-				document.getElementById("Choix"+choix.Nom).innerHTML = fundinaddr+nomvote;	
+				document.getElementById("Choice"+choices.Name).innerHTML = fundinaddr+nomvote;	
 			}
 			else {
 				console.log("Error");
 			}
-			setTimeout(testrcv, 15000, choix);
+			setTimeout(testrcv, 15000, choices);
 		}
 	};
 	xrhttp.onerror =  function(e){
 		console.log("Error");
-		setTimeout(testrcv, 15000, choix);
+		setTimeout(testrcv, 15000, choices);
 	};
-	xrhttp.open("GET", "https://explorer.coloredcoins.org/api/GetAddressInfo?address="+choix.Adresse, true);
+	xrhttp.open("GET", "https://explorer.coloredcoins.org/api/GetAddressInfo?address="+choices.Address, true);
 	xrhttp.setRequestHeader("Cache-Control", "no-cache,no-store");
 	xrhttp.setRequestHeader("Pragma", "no-cache");
 	xrhttp.setRequestHeader("Expires", -1);
 	xrhttp.send();
 };
 window.onload = function () {
-	console.log(adrchoix)
-	document.getElementById("votename").innerHTML = adrchoix.Token[0].Name;
-	document.getElementById("organizer").innerHTML = "Organis&eacute; par "+adrchoix.Token[0].Organizer;
-	adrchoix.choix.forEach(function(choix) {
-		var divchoix = document.createElement('div');
-		divchoix.id = "DivChoix"+choix.Nom;
-		divchoix.classList.add('chosen');
-		var nomchoix = document.createElement('h3');
-		nomchoix.innerHTML = choix.Nom;
+	console.log(choiceadr)
+	document.getElementById("votename").innerHTML = choiceadr.Token[0].Name;
+	document.getElementById("organizer").innerHTML = "Organized by "+choiceadr.Token[0].Organizer;
+	choiceadr.choices.forEach(function(choices) {
+		var divchoices = document.createElement('div');
+		divchoices.id = "DivChoice"+choices.Name;
+		divchoices.classList.add('chosen');
+		var nomchoices = document.createElement('h3');
+		nomchoices.innerHTML = choices.Name;
 		var elemDiv = document.createElement('p');
-		elemDiv.id = "Choix"+choix.Nom;
-		divchoix.appendChild(nomchoix);
-		document.body.appendChild(divchoix);
-		var qrcode = new QRCode(divchoix.id, {width:202,height: 202, correctLevel : QRCode.CorrectLevel.M});
-		qrcode.makeCode("bitcoin:"+choix.Adresse);
-		divchoix.appendChild(elemDiv);
-		var address = choix.Addresse;
-		setTimeout(testrcv, 500, choix);
-		var divchoix = document.getElementById('Organizer').appendChild(divchoix);
+		elemDiv.id = "Choice"+choices.Name;
+		divchoices.appendChild(nomchoices);
+		document.body.appendChild(divchoices);
+		var qrcode = new QRCode(divchoices.id, {width:202,height: 202, correctLevel : QRCode.CorrectLevel.M});
+		qrcode.makeCode("bitcoin:"+choices.Address);
+		divchoices.appendChild(elemDiv);
+		var address = choices.Address;
+		setTimeout(testrcv, 500, choices);
+		var divchoices = document.getElementById('Organizer').appendChild(divchoices);
 	})
 }
