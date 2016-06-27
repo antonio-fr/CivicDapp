@@ -195,7 +195,7 @@ function GoProcess(choices, voters) {
 					"phoneNumber": item.phone,
 					"assetId": assetId,
 					"amount": 1 });
-			if (item.adresse != undefined)
+			if (item.address != undefined)
 				args.to.push({
 					"address": item.address,
 					"assetId": assetId,
@@ -210,7 +210,7 @@ function Generate(){
 		var nodearray = Array.from(document.getElementById("choicelist").children);
 		nodearray.forEach(function(entry) {
 			if (entry.className === "fieldset"){
-				entry.children.forEach(function(echild){
+				entry.childNodes.forEach(function(echild){
 					if (echild.nodeName === "INPUT" && echild.id != "addc")
 						choices.push(echild.value);
 				});
