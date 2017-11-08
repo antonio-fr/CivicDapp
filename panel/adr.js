@@ -11,7 +11,7 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>
 
-function testrcv(choices){
+function testrcv(choices,netw){
 	var receivedok=false;
 	var xrhttp = new XMLHttpRequest();
 	xrhttp.onreadystatechange = function() {
@@ -34,14 +34,20 @@ function testrcv(choices){
 			else {
 				console.log("Error");
 			}
-			setTimeout(testrcv, 15000, choices);
+			setTimeout(testrcv, 15000, choices, netw);
 		}
 	};
 	xrhttp.onerror =  function(e){
 		console.log("Error");
-		setTimeout(testrcv, 15000, choices);
+		setTimeout(testrcv, 15000, choices, netw);
 	};
-	xrhttp.open("GET", "https://explorer.coloredcoins.org/api/GetAddressInfo?address="+choices.Address, true);
+	if (netw === "mainnet" ){
+		var apiurl = "explorer.coloredcoins.org/api/GetAddressInfo?address=";
+	}
+	else{
+		var apiurl = "testnet.explorer.coloredcoins.org/api/GetAddressInfo?address=";
+	}
+	xrhttp.open("GET", "https://"+apiurl+choices.Address, true);
 	xrhttp.setRequestHeader("Cache-Control", "no-cache,no-store");
 	xrhttp.setRequestHeader("Pragma", "no-cache");
 	xrhttp.setRequestHeader("Expires", -1);
@@ -62,14 +68,19 @@ window.onload = function () {
 		divchoices.appendChild(nomchoices);
 		document.body.appendChild(divchoices);
 		var qrcode = new QRCode(divchoices.id, {width:202,height: 202, correctLevel : QRCode.CorrectLevel.M});
-		qrcode.makeCode("bitcoin:"+choices.Address);
+		var address = choices.Address;
+		qrcode.makeCode("bitcoin:"+address);
 		var domadrchoice = document.createElement('p');
 		domadrchoice.id = "adrchoice";
-		domadrchoice.innerHTML = choices.Address;
+		domadrchoice.innerHTML = address;
 		divchoices.appendChild(domadrchoice);
 		divchoices.appendChild(elemDiv);
-		var address = choices.Address;
-		setTimeout(testrcv, 500, choices);
+		if (address.startsWith("1")){
+			setTimeout(testrcv, 500, choices, "mainnet");
+		}
+		else{
+			setTimeout(testrcv, 500, choices, "testnet");
+		}
 		var divchoices = document.getElementById('Organizer').appendChild(divchoices);
 	})
 }
