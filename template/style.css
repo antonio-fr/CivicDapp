@@ -123,7 +123,7 @@ html {
   word-wrap: break-word;
   font-family: sans-serif;
   text-rendering: optimizelegibility;
-  font-size: 62.5% !important; }
+  font-size: 10px !important; }
 /* DISPLAY */
 html, body, div, span, applet, object, iframe, p, blockquote, pre, a, abbr,
 acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s,
@@ -196,6 +196,9 @@ h6 {
     font-size: 2rem; } }
 p {
   margin-bottom: 15px; }
+#adrchoice{
+  font-size: 1.25rem;
+}
 abbr[title] {
   border-bottom: 1px dotted; }
 b, strong {
@@ -419,7 +422,7 @@ section code {
   color: #bbb; }
 /* PANEL */
 section .chosen {
-  padding: 26px;
+  padding: 18px;
   width: 280px;
   margin: 0 auto;
   margin-bottom: 32px;

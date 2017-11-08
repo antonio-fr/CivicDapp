@@ -63,6 +63,10 @@ window.onload = function () {
 		document.body.appendChild(divchoices);
 		var qrcode = new QRCode(divchoices.id, {width:202,height: 202, correctLevel : QRCode.CorrectLevel.M});
 		qrcode.makeCode("bitcoin:"+choices.Address);
+		var domadrchoice = document.createElement('p');
+		domadrchoice.id = "adrchoice";
+		domadrchoice.innerHTML = choices.Address;
+		divchoices.appendChild(domadrchoice);
 		divchoices.appendChild(elemDiv);
 		var address = choices.Address;
 		setTimeout(testrcv, 500, choices);
